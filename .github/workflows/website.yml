@@ -1,5 +1,7 @@
 name: Website
 
+# Production deployment trigger: keep this workflow on main and deploy the live site.
+
 on:
   push:
     branches: [main]
@@ -39,7 +41,19 @@ jobs:
         run: npm run typecheck
       - name: Verify social policy gate
         run: node --test --experimental-strip-types app/api/social/draft/policy.test.ts
+      - name: Verify authorization contract
+        run: node --test --experimental-strip-types app/api/social/draft/authorization.test.ts
+      - name: Verify human approval boundary
+        run: node --test --experimental-strip-types app/api/social/draft/human-approval.test.ts
+      - name: Verify publisher dry-run receipt
+        run: node --test --experimental-strip-types app/api/social/draft/publisher.test.ts
+      - name: Verify external publisher boundary
+        run: node --test --experimental-strip-types app/api/social/draft/external-publisher.test.ts
+      - name: Verify LinkedIn publisher adapter
+        run: node --test --experimental-strip-types app/api/social/draft/linkedin-publisher.test.ts
       - name: Build
+        env:
+          NEXT_PUBLIC_CONTROL_PLANE_API_URL: https://naeos-control-plane-production.up.railway.app
         run: npx opennextjs-cloudflare build
       - name: Populate static assets cache
         run: npx opennextjs-cloudflare populateCache local

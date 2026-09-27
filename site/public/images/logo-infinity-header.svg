@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">NAEOS Infinity Mark</title>
+  <desc id="desc">NAEOS infinity mark matching the supplied cyan, blue and violet reference.</desc>
+  <defs>
+    <linearGradient id="naeo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#19DDF5"/>
+      <stop offset="48%" stop-color="#228CF5"/>
+      <stop offset="68%" stop-color="#4653F2"/>
+      <stop offset="100%" stop-color="#8A4DFF"/>
+    </linearGradient>
+    <linearGradient id="naeo-cross" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16CFF2"/>
+      <stop offset="50%" stop-color="#286EF3"/>
+      <stop offset="100%" stop-color="#864AF8"/>
+    </linearGradient>
+  </defs>
+  <path d="M150 250 C150 155 205 115 265 115 C315 115 350 150 390 190 L510 310 C550 350 600 385 650 350 C690 322 690 178 650 150 C600 115 550 150 510 190 L390 310 C350 350 315 385 265 385 C205 385 150 345 150 250"
+        fill="none" stroke="url(#naeo-gradient)" stroke-width="76" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M265 115 C315 115 350 150 390 190 L510 310 C550 350 600 385 650 350"
+        fill="none" stroke="url(#naeo-cross)" stroke-width="76" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
