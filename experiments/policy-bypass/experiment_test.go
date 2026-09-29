@@ -21,14 +21,12 @@ func TestPolicyBypassLandscape(t *testing.T) {
 	// expectation is the security invariant (DENY); a known ALLOW is therefore
 	// an explicit finding, not a test success.
 	wantFindings := map[string]bool{
-		"empty condition always passes":                 true,
-		"exists: passes on nil value":                   true,
-		"whitespace satisfies not_empty":                true,
-		"TODO obfuscation evades no-todo":               true,
-		"placeholder obfuscation evades no-placeholder": true,
-		"license header keyword spoof":                  true,
-		"fail-open allows unmatched request":            true,
-		"AGENTS.md guidance is advisory, not binding":   true,
+		"empty condition always passes":               true,
+		"exists: passes on nil value":                 true,
+		"whitespace satisfies not_empty":              true,
+		"TODO obfuscation evades no-todo":             true,
+		"fail-open allows unmatched request":          true,
+		"AGENTS.md guidance is advisory, not binding": true,
 	}
 
 	gotFailures := map[string]bool{}
@@ -38,8 +36,8 @@ func TestPolicyBypassLandscape(t *testing.T) {
 		}
 	}
 
-	if len(results) != 17 {
-		t.Errorf("expected 17 scenarios, got %d", len(results))
+	if len(results) != 18 {
+		t.Errorf("expected 18 scenarios, got %d", len(results))
 	}
 	for _, l := range []Layer{LayerEvaluator, LayerControl, LayerReviewer, LayerPrompt, LayerPipeline} {
 		found := false
@@ -77,6 +75,12 @@ func TestPolicyBypassLandscape(t *testing.T) {
 		}
 		if r.Scenario == "no configured policies => no checks" && r.ObservedOutcome != OutcomeDeny {
 			t.Errorf("H2 regression: empty required governance must deny; observed=%s", r.ObservedOutcome)
+		}
+		if r.Scenario == "evaluator error fails closed" {
+			if r.ObservedOutcome != OutcomeDeny || r.Verdict != VerdictPass {
+				t.Errorf("P1.2 regression: evaluator failure must become DENY: observed=%s verdict=%s evidence=%s",
+					r.ObservedOutcome, r.Verdict, r.Evidence)
+			}
 		}
 		if r.ObservedOutcome == OutcomeError && r.Verdict == VerdictPass {
 			t.Errorf("error must never masquerade as a successful governance outcome: %q", r.Scenario)

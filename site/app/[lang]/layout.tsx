@@ -38,7 +38,7 @@ export async function generateMetadata(props: {
         { url: "/favicon.svg", type: "image/svg+xml" },
         { url: "/favicon.ico", sizes: "any" },
       ],
-      apple: "/images/naeos-engineering-logo.webp",
+      apple: "/images/logo-infinity-primary.svg",
     },
     manifest: "/manifest.json",
     openGraph: {
