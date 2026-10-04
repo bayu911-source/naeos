@@ -1,16 +1,17 @@
 # NAEOS — Official Whitepaper
 
-**Nusantara Engineering & Architecture Operating System**
+**Nusantara AI Engineering Operating System**
 
-> *"Specify Once. Build Anywhere."*
+> *"Architecture Drives Engineering."*
 
 | | |
 |---|---|
 | **Document Version** | 1.0.0 |
-| **Status** | Public Draft |
+| **Status** | Stable |
 | **Project License** | Apache License 2.0 |
 | **Repository** | github.com/NAEOS-foundation/naeos |
-| **Platform Version** | v3.6.0 (repository state) |
+| **Software Release Baseline** | v3.6.0
+| **Engineering Milestone Baseline** | P1.11 — Independent Verifier CLI (DONE) |
 
 ---
 
@@ -18,7 +19,7 @@
 
 NAEOS is an open-source declarative engineering platform that transforms specifications into high-quality software systems through a consistent, validated, and extensible pipeline. NAEOS is not just a project generator — it is an *engineering runtime* that understands specifications, builds an internal model (NEIR), orchestrates execution plans, generates artifacts, validates results, and keeps projects aligned with their specifications throughout the entire lifecycle.
 
-Under the motto **"Specify Once. Build Anywhere."**, NAEOS enables organizations to describe their system **once**, then derive code, documentation, configuration, and AI context from a shared engineering model across multiple languages and frameworks.
+Under the motto **"Architecture Drives Engineering."**, NAEOS enables organizations to describe their system **once**, then derive code, documentation, configuration, and AI context from a shared engineering model across multiple languages and frameworks.
 
 The current repository state includes Specification Language v2, a multi-adapter AI compiler, a NEIR-aware LSP, constitution-based governance, a marketplace, a production server daemon (`naeos serve`), SBOM and artifact signing, Helm chart scaffolding, and compliance-oriented policy templates for SOC 2, HIPAA, and GDPR workflows.
 
@@ -421,14 +422,17 @@ Plugins execute safely through a **JSON-over-stdin/stdout sandbox** and **WASI**
 | CLI test coverage | ~80.8% (target 100%) |
 | Packages ≥80% coverage | 13+ (watch, rollback, cicd, distributed, gateway, websocket, configschema, monitoring, configreload, database, auth, supabase, and more) |
 
-### Roadmap
+### Current execution strategy
 
-- **v3.5.0** — Observability: OpenTelemetry (OTLP) tracing export, SLO & Prometheus alerting, audit export to SIEM
-- **v3.6.0** — Scale: durable job queue (Postgres outbox), networked pipeline workers (NATS/Kafka), idempotency
-- **v3.7.0+** — API v2, outbound webhooks, official SDKs, MFA/SCIM, per-tenant governance
+The project is sequencing work around proof and adoption rather than opening another feature-expansion cycle:
 
-See [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) for the current project roadmap and milestone status.
+1. **P0 — Public consistency:** synchronize website, SEO, whitepaper, FAQ, About, and public documentation.
+2. **P1 — Golden Path:** make P1.6–P1.10 the primary reproducible developer proof, with P1.11 providing independent verification.
+3. **P2 — External adoption:** work with the first 5–10 developers or repositories and capture evidence, friction, and failure modes.
+4. **P3 — Ecosystem:** prioritize SDKs, integrations, and marketplace work from recurring adoption needs.
+5. **P4 — Commercialization:** evaluate Cloud/Enterprise packaging after technical adoption evidence exists.
 
+These are execution stages, not software release versions. See [ROADMAP.md](ROADMAP.md) for the current public execution roadmap.
 ---
 
 ## 8. Licensing & Project Governance
@@ -469,6 +473,6 @@ Under Apache License 2.0, with a vendor-neutral architecture and a growing ecosy
 
 ---
 
-*NAEOS Foundation — "Engineering With Discipline"*
+*NAEOS OSS — "Engineering With Discipline"*
 
-*This document is based on the actual state of the project (NAEOS-foundation/naeos repository, v3.6.0) and is intended for publication, technical evaluation, and adoption discussions. All technical claims can be verified in the official project documentation (docs/NES-*, specification/, constitution/).*
+*This document is based on the actual state of the project (NAEOS-foundation/naeos repository; software release baseline v3.6.0; engineering milestone P1.11) and is intended for publication, technical evaluation, and adoption discussions. All technical claims can be verified in the official project documentation (docs/NES-*, specification/, constitution/).*

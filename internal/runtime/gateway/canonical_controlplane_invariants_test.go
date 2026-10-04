@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 package gateway_test
@@ -29,7 +29,7 @@ func realControlPlane(t *testing.T, policies ...*policy.Policy) (*control.Contro
 			t.Fatalf("register policy: %v", err)
 		}
 	}
-	return control.New(reg, control.FailClosed(true)), reg
+	return control.New(reg), reg
 }
 
 func TestCanonicalControlPlaneDenialBlocksSideEffect(t *testing.T) {

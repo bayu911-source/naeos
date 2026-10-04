@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 export const LANGUAGES = ["en", "id"] as const;
@@ -9,14 +9,14 @@ export const DEFAULT_LANG: Lang = "en";
 export const SITE = {
   baseUrl: "https://naeos.dev",
   title: {
-    en: "NAEOS — Declarative Platform Engineering System",
-    id: "NAEOS — Sistem Rekayasa Platform Deklaratif",
+    en: "NAEOS — AI Engineering Operating System",
+    id: "NAEOS — Engineering Control Plane untuk AI Coding Agents",
   } as Record<Lang, string>,
   description: {
-    en: "Transform YAML/JSON specifications into validated, multi-language project structures with full traceability from intent to implementation.",
-    id: "Ubah spesifikasi YAML/JSON menjadi struktur proyek multi-bahasa yang tervalidasi dengan ketelusuran penuh dari niat hingga implementasi.",
+    en: "Open-source engineering control plane for AI coding agents: specification, policy, authorized execution, evidence, and independent verification.",
+    id: "Engineering control plane open-source untuk AI coding agents: specification, policy, authorized execution, evidence, dan independent verification.",
   } as Record<Lang, string>,
-  copyright: "Copyright © 2026 NAEOS Foundation. All rights reserved.",
+  copyright: "Copyright © 2025-2026 NAEOS contributors.",
   repo: "https://github.com/NAEOS-foundation/naeos",
   repoOwner: "NAEOS-foundation",
   repoName: "naeos",

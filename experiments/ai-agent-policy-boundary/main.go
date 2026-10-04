@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 package main
@@ -142,7 +142,7 @@ func newControl(decision policy.Decision) *control.ControlPlane {
 		Scope:   policy.Scope{Resource: resource, Action: action, Environment: environment},
 		Default: decision, Active: true,
 	})
-	return control.New(reg, control.FailClosed(true))
+	return control.New(reg)
 }
 
 func appendEvidence(result gateway.ExecutionResult, observed []byte) (evidence.EvidenceRecord, *evidence.EvidenceStore, error) {

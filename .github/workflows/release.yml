@@ -9,6 +9,8 @@ permissions:
   contents: write
   packages: write
   pull-requests: write
+  id-token: write
+  attestations: write
 
 jobs:
   release:
@@ -85,7 +87,59 @@ jobs:
             --project NAEOS \
             --version "${{ steps.version.outputs.VERSION }}" \
             --output "naeos_${{ steps.version.outputs.VERSION }}.bom.json"
-          go run ./cmd/naeos/ sbom verify "naeos_${{ steps.version.outputs.VERSION }}.bom.json"
+          go run ./cmd/naeos/ sbom verify --require-licenses "naeos_${{ steps.version.outputs.VERSION }}.bom.json"
+
+      - name: Verify release DCO evidence
+        run: |
+          BASE="$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 --first-parent HEAD)"
+          bash scripts/check-release-dco.sh "$BASE" "$GITHUB_SHA"
+
+      - name: Attest release artifacts
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-checksums: checksums.txt
+
+      - name: Attest release SBOM
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: |
+            naeos-linux-amd64
+            naeos-linux-arm64
+            naeos-darwin-amd64
+            naeos-darwin-arm64
+            naeos-windows-amd64.exe
+          sbom-path: naeos_${{ steps.version.outputs.VERSION }}.bom.json
+
+      - name: Generate release legal evidence
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.VERSION }}
+          DCO_STATUS: PASS
+          DEPENDENCY_LICENSE_STATUS: ${{ vars.NAEOS_LEGAL_DEPENDENCY_LICENSE_STATUS || 'HOLD' }}
+          ATTRIBUTION_STATUS: ${{ vars.NAEOS_LEGAL_ATTRIBUTION_STATUS || 'HOLD' }}
+          SECURITY_STATUS: ${{ vars.NAEOS_LEGAL_SECURITY_STATUS || 'HOLD' }}
+          PROVENANCE_STATUS: PASS
+          TRADEMARK_STATUS: ${{ vars.NAEOS_LEGAL_TRADEMARK_STATUS || 'HOLD' }}
+          LEGAL_EVIDENCE_REVIEWER: ${{ vars.NAEOS_LEGAL_EVIDENCE_REVIEWER || 'github-actions' }}
+        run: |
+          bash scripts/generate-legal-evidence.sh \
+            --sbom "naeos_${{ steps.version.outputs.VERSION }}.bom.json" \
+            --output "release-legal-evidence.json"
+
+      - name: Validate release legal evidence
+        run: |
+          bash scripts/validate-legal-evidence.sh release-legal-evidence.json
+
+      - name: Upload release legal evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-legal-evidence-${{ steps.version.outputs.VERSION }}
+          path: release-legal-evidence.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Enforce release legal gate
+        run: |
+          bash scripts/release-legal-gate.sh release-legal-evidence.json
 
       - name: Package tar.gz archives (installer format)
         run: |
@@ -121,7 +175,7 @@ jobs:
             "naeos_${VERSION}_darwin_amd64.tar.gz" "naeos_${VERSION}_darwin_arm64.tar.gz" \
           ; do
             ./naeos-linux-amd64 sign sign "$f" --key /tmp/naeos-release-key.json \
-              --signer "NAEOS Foundation" -o "release-signatures/$(basename "$f").sig.json"
+              --signer "NAEOS OSS" -o "release-signatures/$(basename "$f").sig.json"
           done
           python3 -c "import json; print(json.load(open('/tmp/naeos-release-key.json'))['publicKey'])" \
             > release-signatures/naeos-release-key.txt

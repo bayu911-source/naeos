@@ -30,6 +30,18 @@ go build ./cmd/naeos/
 go test ./...
 ```
 
+## External Contributor Path
+
+For a first contribution, use this bounded path:
+
+1. Start from [START-HERE.md](START-HERE.md) and run the canonical Golden Path.
+2. Record the commit, command, environment, expected result, and observed result.
+3. For a reproducibility or documentation finding, open a focused issue with the relevant evidence.
+4. For a design question or architectural challenge, use the documented [discussion workflow](docs/community/discussions.md).
+5. For a code change, keep the PR scoped to one problem and include the tests or verification performed.
+
+When reporting a failure, include the smallest reproducible command and the relevant output. Do not report an issue as a product defect solely from an agent's claim; distinguish observed behavior from interpretation.
+
 ## Development Workflow
 
 ### Build
@@ -292,19 +304,36 @@ per the [Developer Certificate of Origin](https://developercertificate.org/):
 2. You have the right to submit it for inclusion in this project.
 
 The DCO check (`.github/workflows/dco.yml`) verifies every commit in a pull
-request. If you contribute on behalf of an employer, client, or other party,
-make sure that party has granted you the right to contribute under the
-Apache License 2.0. NAEOS Foundation may require a Contributor License
-Agreement (CLA) for commercial or corporate contributions, especially ahead of
-the NAEOS Cloud / Enterprise products.
+request and is required by the `main` branch ruleset. If you contribute on
+behalf of an employer, client, or other party, make sure that party has granted
+you the right to contribute under the Apache License 2.0. NAEOS does not
+require copyright assignment through the DCO; the DCO records the contributor's
+certification that they have the right to submit the contribution.
+
+If your contribution includes work created as an employee, contractor,
+freelancer, or agency representative, confirm that the applicable agreement or
+rights holder permits submission under Apache-2.0. Do not publish contracts,
+employer approvals, or other confidential evidence in a pull request; contact
+the maintainers if a private rights question needs review.
+
+Document reused third-party code, text, examples, specifications, or assets in
+the pull request and identify their source and license. Do not rely on a
+publicly accessible URL as proof that material can be redistributed. For
+generated material, identify the generator and relevant source/template when
+that information is material to establishing provenance.
 
 ## AI-Assisted Contributions
 
 AI-assisted and agent-generated contributions are welcome. You remain
 responsible for the rights to every line you submit, whether written by hand or
 produced by a tool, and for keeping secrets and third-party material out of the
-repository. See the [AI-assisted contribution provenance
-policy](docs/ai-provenance.md) for the full guidance.
+repository. For substantial AI-generated or agent-generated content, add a
+brief provenance note to the pull request describing the affected files or
+content, the tool or generator, and relevant source material. Do not include
+private prompts, confidential inputs, personal data, or secrets. Routine
+editorial assistance does not require disclosure. See the
+[AI-assisted contribution provenance policy](docs/ai-provenance.md) for the
+full guidance.
 
 ## Security
 

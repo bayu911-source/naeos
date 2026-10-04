@@ -1,6 +1,6 @@
 # NAEOS
 
-**Nusantara Engineering & Architecture Operating System**
+**Nusantara AI Engineering Operating System**
 
 > **The Engineering Control Plane for AI Coding Agents.**
 >
@@ -107,6 +107,9 @@ The demo exercises the specification-first pipeline and produces traceable run m
 **Reference Demo & Evidence Story:** [docs/REFERENCE-DEMO.md](docs/REFERENCE-DEMO.md) turns the same run into an independent reviewer checklist, traceability narrative, and partner-pilot evidence format.
 
 **External Validation:** [docs/EXTERNAL-VALIDATION.md](docs/EXTERNAL-VALIDATION.md) provides a reproducible third-party runbook and evaluation record.
+**Engineering Note #001:** [docs/ENGINEERING-NOTE-001-EXTERNAL-VALIDATION.md](docs/ENGINEERING-NOTE-001-EXTERNAL-VALIDATION.md) explains the engineering rationale and evidence boundary for independent external validation.
+
+**External Validator Program:** [docs/EXTERNAL-VALIDATOR-BRIEF.md](docs/EXTERNAL-VALIDATOR-BRIEF.md) is the public entry point for Cohort #001; see [Program](docs/EXTERNAL-VALIDATOR-PROGRAM.md) and [Missions](docs/EXTERNAL-VALIDATION-MISSIONS.md) for the program protocol.
 
 For the Todo API demonstration:
 
@@ -252,7 +255,7 @@ For release history and changes, see [CHANGELOG.md](CHANGELOG.md).
 - [GETTING-STARTED.md](GETTING-STARTED.md) — developer setup
 - [DOCUMENTATION-AUTHORITY.md](DOCUMENTATION-AUTHORITY.md) — normative documentation model
 - [WHITEPAPER-EN.md](WHITEPAPER-EN.md) — English whitepaper
-- [WHITEPAPER.md](WHITEPAPER.md) — Bahasa Indonesia whitepaper
+- [WHITEPAPER.md](WHITEPAPER.md) — official English whitepaper
 - [DOCUMENTATION-INDEX.md](DOCUMENTATION-INDEX.md) — document index
 - [docs/](docs/) — NAEOS engineering specifications
 - [CHANGELOG.md](CHANGELOG.md) — release history
@@ -308,6 +311,7 @@ For public community acquisition, use the workspace's Slack shared-invite URL ra
 - [Governance](governance/) — project governance material
 - [AI-assisted provenance policy](docs/ai-provenance.md) — guidance for AI-assisted contributions
 - [Open-core boundary](docs/open-core.md) — relationship between NAEOS Core and future offerings
+- [Legal Architecture](legal/README.md) — IP provenance, trademarks, third-party licensing, and release legal controls
 
 ## License
 
@@ -315,7 +319,7 @@ NAEOS is released under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE) 
 
 Contributions are accepted under the [Developer Certificate of Origin](https://developercertificate.org/) as described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The **NAEOS**, **NEIR**, and NAEOS logo names are branding of the NAEOS Foundation. The Apache License grants no trademark rights; see [NOTICE](NOTICE) for the current branding and trademark policy.
+The **NAEOS**, **NEIR**, and NAEOS logo names are branding of the NAEOS OSS. The Apache License grants no trademark rights; see [NOTICE](NOTICE) for the current branding and trademark policy.
 
 ---
 

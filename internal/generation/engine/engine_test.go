@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 package engine
@@ -40,6 +40,34 @@ func TestGeneratorCreatesArtifactsFromNEIR(t *testing.T) {
 	if !foundModule {
 		t.Error("expected module README artifact")
 	}
+}
+
+func TestGenerateIncludesLicenseHeaderForGoModulePackage(t *testing.T) {
+	neir := &model.NEIR{
+		Project: &project.Project{Name: "acme-api"},
+		Modules: []module.Module{{Name: "auth", Path: "./auth"}},
+	}
+
+	engine := NewEngine()
+	artifacts, err := engine.Generate(neir)
+	if err != nil {
+		t.Fatalf("Generate returned error: %v", err)
+	}
+
+	for _, artifact := range artifacts {
+		if artifact.Path != "auth/package.go" {
+			continue
+		}
+		content := string(artifact.Content)
+		if !strings.Contains(content, "Copyright 2025 NAEOS contributors") {
+			t.Fatalf("expected license header in %s", artifact.Path)
+		}
+		if !strings.Contains(content, "SPDX-License-Identifier: Apache-2.0") {
+			t.Fatalf("expected SPDX header in %s", artifact.Path)
+		}
+		return
+	}
+	t.Fatal("expected auth/package.go artifact")
 }
 
 func TestGenerateForLanguageGo(t *testing.T) {
@@ -111,7 +139,7 @@ func TestGenerateForLanguageGoIncludesLicenseHeader(t *testing.T) {
 	for _, a := range artifacts {
 		if strings.HasSuffix(a.Path, ".go") {
 			content := string(a.Content)
-			if !strings.Contains(content, "Copyright 2024-2026 NAEOS Foundation") {
+			if !strings.Contains(content, "Copyright 2025 NAEOS contributors") {
 				t.Errorf("expected license header in %s", a.Path)
 			}
 			if !strings.Contains(content, "package ") {

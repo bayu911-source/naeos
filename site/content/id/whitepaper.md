@@ -3,9 +3,9 @@ title: "Whitepaper NAEOS"
 description: "Whitepaper resmi NAEOS — platform engineering deklaratif yang mengubah spesifikasi menjadi sistem perangkat lunak multi-bahasa yang tervalidasi. Tentukan Sekali. Bangun di Mana Saja."
 ---
 
-**Nusantara Engineering & Architecture Operating System**
+**Nusantara AI Engineering Operating System**
 
-> *"Specify Once. Build Anywhere."*
+> *"Architecture Drives Engineering."*
 
 | | |
 |---|---|
@@ -21,7 +21,7 @@ description: "Whitepaper resmi NAEOS — platform engineering deklaratif yang me
 
 NAEOS adalah platform engineering deklaratif open-source yang mengubah spesifikasi menjadi sistem perangkat lunak berkualitas tinggi melalui pipeline yang konsisten, tervalidasi, dan dapat diperluas. NAEOS bukan sekadar *project generator* — ia adalah *engineering runtime* yang memahami spesifikasi, membangun model internal (NEIR), mengorkestrasi rencana eksekusi, menghasilkan artefak, memvalidasi hasil, dan menjaga proyek tetap selaras dengan spesifikasinya sepanjang siklus hidup.
 
-Dengan semboyan **"Specify Once. Build Anywhere."**, NAEOS memungkinkan organisasi mendeskripsikan sistem mereka **sekali**, lalu membangun, memvalidasi, dan mengevolusi perangkat lunak di berbagai bahasa, framework, dan platform — dengan model engineering yang dapat dibagi untuk kode, dokumentasi, konfigurasi, dan konteks AI.
+Dengan semboyan **"Architecture Drives Engineering."**, NAEOS memungkinkan organisasi mendeskripsikan sistem mereka **sekali**, lalu membangun, memvalidasi, dan mengevolusi perangkat lunak di berbagai bahasa, framework, dan platform — dengan model engineering yang dapat dibagi untuk kode, dokumentasi, konfigurasi, dan konteks AI.
 
 Status repositori saat ini mencakup spesifikasi bahasa v2, kompiler AI multi-adapter, LSP NEIR-aware, tata kelola berbasis konstitusi, marketplace, daemon produksi (`naeos serve`), SBOM & artifact signing, Helm chart scaffolding, dan template kebijakan yang berorientasi pada kepatuhan SOC 2, HIPAA, dan GDPR.
 
@@ -425,13 +425,17 @@ Plugin dapat dieksekusi dengan aman melalui **sandbox JSON-over-stdin/stdout** d
 | Test coverage CLI | ~80.8% (target 100%) |
 | Package coverage ≥80% | 13+ (watch, rollback, cicd, distributed, gateway, websocket, configschema, monitoring, configreload, database, auth, supabase, dan lainnya) |
 
-### Roadmap
+### Strategi eksekusi saat ini
 
-- **v3.5.0** — Observability: ekspor tracing OpenTelemetry (OTLP), SLO & alerting Prometheus, ekspor audit ke SIEM
-- **v3.6.0** — Skala: durable job queue (Postgres outbox), worker pipeline jaringan (NATS/Kafka), idempotency
-- **v3.7.0+** — API v2, webhooks outbound, SDK resmi, MFA/SCIM, governance per-tenant
+Proyek memprioritaskan proof dan adoption sebelum feature expansion berikutnya:
 
-Lihat [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) untuk roadmap proyek saat ini dan status milestone.
+1. **P0 — Public consistency:** sinkronkan website, SEO, whitepaper, FAQ, About, dan dokumentasi publik.
+2. **P1 — Golden Path:** jadikan P1.6–P1.10 sebagai proof developer yang reproducible, dengan P1.11 sebagai independent verification.
+3. **P2 — External adoption:** bekerja dengan 5–10 developer atau repository pertama dan mengumpulkan evidence, friction, dan failure modes.
+4. **P3 — Ecosystem:** prioritaskan SDK, integrations, dan marketplace berdasarkan kebutuhan adoption yang berulang.
+5. **P4 — Commercialization:** evaluasi Cloud/Enterprise setelah tersedia evidence technical adoption.
+
+Tahapan ini adalah execution stages, bukan software release versions. Lihat [ROADMAP.md](ROADMAP.md) untuk roadmap eksekusi publik saat ini.
 
 ---
 
@@ -473,6 +477,6 @@ Dengan lisensi Apache 2.0, arsitektur netral vendor, dan ekosistem yang terus be
 
 ---
 
-*NAEOS Foundation — "Engineering With Discipline"*
+*NAEOS OSS — "Engineering With Discipline"*
 
-*Dokumen ini disusun berdasarkan state proyek nyata (repo NAEOS-foundation/naeos, v3.6.0) dan ditujukan sebagai bahan publikasi, evaluasi teknis, dan diskusi adopsi. Seluruh klaim teknis dapat diverifikasi di dokumentasi resmi proyek (docs/NES-*, specification/, constitution/).*
+*Dokumen ini disusun berdasarkan state proyek nyata (repo NAEOS-foundation/naeos; software release baseline v3.6.0; engineering milestone P1.11) dan ditujukan sebagai bahan publikasi, evaluasi teknis, dan diskusi adopsi. Seluruh klaim teknis dapat diverifikasi di dokumentasi resmi proyek (docs/NES-*, specification/, constitution/).*

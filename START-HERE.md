@@ -1,8 +1,8 @@
 # Start Here
 
-You do not need to read the whole NAEOS architecture before you can understand the value. The shortest path is: understand the problem, run one example, and then decide whether to contribute.
+You do not need to read the whole NAEOS architecture before you can understand the value. The shortest path is: understand the control boundary, run one reproducible proof, inspect the evidence, and then decide whether to contribute.
 
-NAEOS is a platform for turning a system specification into a shared engineering model that can be validated, generated, and used by AI tools without drifting away from the actual design.
+NAEOS is an open-source engineering control plane for AI coding agents. It connects specification, policy, authorized execution, observation, evidence, and independent verification so agent actions can be inspected against explicit engineering intent.
 
 ## Coming from the NAEOS newsletter?
 
@@ -18,9 +18,9 @@ This is the bridge between reading about NAEOS and participating in the reposito
 
 ## 1. What is NAEOS?
 
-NAEOS helps teams keep architecture, implementation, and AI context aligned by using a software specification as the source of truth. Instead of letting documentation, prompts, and generated code drift apart, the system builds a shared engineering model and validates it before generating artifacts.
+NAEOS connects engineering intent, policy, authorized execution, and evidence around a shared engineering model. The repository's Golden Path makes that control flow reproducible and inspectable before generated artifacts are treated as evidence of the run.
 
-The practical question is simple: when an AI agent takes action, how do we know it is still operating against the current design, policy, and scope? NAEOS is built around that problem.
+The practical question is simple: when an AI agent takes action, how do we know it is still operating against the current design, policy, and scope? NAEOS is built around that control problem.
 
 ## 2. Why should I care?
 
@@ -36,38 +36,39 @@ Before running locally, you can inspect the public Control Plane at [naeos.dev/c
 
 Use it to understand the public control boundary first; then reproduce the engineering workflow locally with the Golden Path below.
 
-## 4. Try it in 5 minutes
+## 4. Run the Verified Golden Path
 
-The most direct, verified onboarding path in this repository is the canonical CLI demo in [examples/demo-cli/README.md](examples/demo-cli/README.md) and its script at [examples/demo-cli/run-demo.sh](examples/demo-cli/run-demo.sh).
+The canonical onboarding spine is [Verified Golden Path](docs/VERIFIED-GOLDEN-PATH.md). It connects the public control boundary, local Golden Path, evidence inspection, independent verification, governance experiment, and handoff experiment without creating a second implementation path.
 
-This is the repository’s single supported first-run flow:
+Start with the public boundary:
+
+- [NAEOS Control Plane](https://naeos.dev/control-plane/)
+
+Then run the local proof:
 
 ```bash
 go build -o naeos ./cmd/naeos
-./examples/demo-cli/run-demo.sh
+NAEOS_DEMO_OUTPUT_DIR=/tmp/naeos-demo ./examples/demo-cli/run-demo.sh
 ```
 
-The formal [NAEOS Golden Path](docs/GOLDEN-PATH.md) defines the acceptance criteria and evidence map for this same flow.
+The underlying acceptance contract remains [docs/GOLDEN-PATH.md](docs/GOLDEN-PATH.md). The repository-level readiness checklist is [docs/READINESS-CONTRACT.md](docs/READINESS-CONTRACT.md). After the run, inspect the evidence under `/tmp/naeos-demo`, then use the read-only [P1.11 Independent Verifier](docs/control-plane/p1-11-independent-verifier-cli.md) for a canonical `EvidenceBundle`.
 
-For an external technical evaluation, use the [Reference Demo & Evidence Story](docs/REFERENCE-DEMO.md). It turns the same run into an independent reviewer checklist and traceability narrative. For a reproducible third-party review, use the [External Validation Runbook](docs/EXTERNAL-VALIDATION.md) to record the commit, environment, evidence anchors, acceptance results, and deviations.
+### What you just proved
 
-What to expect:
-- the specification is validated
-- NEIR is materialized and inspected
-- policy evaluation is exercised, including deterministic rejection of invalid configuration
-- an AI context bundle is generated
-- a valid run produces generated artifacts
-- run metadata records traceability (`run_id`, `specification_hash`, `neir_hash`)
+A successful local run establishes:
 
-This is the best first check because it demonstrates the real NAEOS control-plane workflow without requiring the full architecture first.
-
-If you want to go one step further with the AI compiler:
-
-```bash
-naeos ai compile --input-file examples/demo-cli/spec.yaml --target opencode
+```text
+Specification
+  → NEIR
+  → Validation
+  → Policy
+  → AI context
+  → Authorized generation
+  → Artifacts
+  → Traceable evidence
 ```
 
-The default demo intentionally does not require an LLM API key.
+The Verified Golden Path adds independent verification and challenge-oriented experiments around that core proof. It does **not** by itself prove production readiness, customer adoption, enterprise compliance, or the safety of every external agent integration.
 
 ## 5. Run the governance experiment
 
@@ -97,7 +98,7 @@ Validate → Policy → AI context
 Generate artifacts and engineering outputs
 ```
 
-If you want the authoritative references, use [DOCUMENTATION-AUTHORITY.md](DOCUMENTATION-AUTHORITY.md) first, then:
+If you want the authoritative references, use [DOCUMENTATION-AUTHORITY.md](DOCUMENTATION-AUTHORITY.md) first. For repository navigation and domain boundaries, see [REPOSITORY-ARCHITECTURE.md](REPOSITORY-ARCHITECTURE.md). Then:
 
 - [NAEOS-NRA-001](Reference%20Architecture/NAEOS-NRA-001.md)
 - [NAEOS-MTS-001](NAEOS-MTS-001.md)
@@ -116,15 +117,15 @@ Start with:
 - [specification/NAEOS-SPEC-001.md](specification/NAEOS-SPEC-001.md)
 - [ARCHITECTURE-OVERVIEW.md](ARCHITECTURE-OVERVIEW.md)
 
-### I want to run NAEOS
+### I want to run or verify NAEOS
 
-Use:
+Start with:
 
-- [GETTING-STARTED.md](GETTING-STARTED.md)
+- [docs/VERIFIED-GOLDEN-PATH.md](docs/VERIFIED-GOLDEN-PATH.md)
 - [docs/GOLDEN-PATH.md](docs/GOLDEN-PATH.md)
 - [docs/REFERENCE-DEMO.md](docs/REFERENCE-DEMO.md)
-- [examples/demo-cli/README.md](examples/demo-cli/README.md)
-- [docs/NES-028-CLI-Reference.md](docs/NES-028-CLI-Reference.md)
+- [docs/control-plane/p1-11-independent-verifier-cli.md](docs/control-plane/p1-11-independent-verifier-cli.md)
+- [docs/EXTERNAL-VALIDATION.md](docs/EXTERNAL-VALIDATION.md)
 
 Verified local path:
 
@@ -221,29 +222,23 @@ If you see a gap, ask: “What assumption does NAEOS currently make that may not
 
 ## 10. Good first issues
 
-The repository has a curated set of concrete contributor starting points. Each issue is intentionally scoped so a new contributor can inspect the relevant code or documentation before writing a large change:
+The repository's current contributor/adoption work is tracked in [#447 — External contributor and adoption readiness](https://github.com/NAEOS-foundation/naeos/issues/447). Use it as the coordination point for onboarding gaps and bounded external-contributor work.
 
-- [#209 — Improve policy evaluator edge-case coverage](https://github.com/NAEOS-foundation/naeos/issues/209)
-- [#210 — Add audit evidence for disabled policy rules](https://github.com/NAEOS-foundation/naeos/issues/210)
-- [#211 — Document the NAEOS contribution workflow](https://github.com/NAEOS-foundation/naeos/issues/211)
-- [#212 — Strengthen experiment evidence format](https://github.com/NAEOS-foundation/naeos/issues/212)
-- [#213 — Review plugin registry contributor path](https://github.com/NAEOS-foundation/naeos/issues/213)
+For a concrete contribution, search the repository's open issues for a scoped task, or open a focused report using [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE). Prefer small changes that can be reproduced and reviewed independently.
 
-Use [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE) for new bug reports, documentation work, feature requests, plugin contributions, or other concrete gaps.
+If you are unsure where a finding belongs, start with [GitHub Discussions](docs/community/discussions.md) for a design/question discussion, or open the closest issue-template category with the exact reproduction steps and evidence.
 
 ## 11. Contribution workflow
 
-The repository now has a curated set of concrete contributor starting points. Pick one based on the kind of work you want to do:
+The repository already defines the engineering workflow in [CONTRIBUTING.md](CONTRIBUTING.md). For the current external-contributor path, use this sequence:
 
-- [#209 — Improve policy evaluator edge-case coverage](https://github.com/NAEOS-foundation/naeos/issues/209) — focused tests for NaN/Inf, empty conditions, nil, and whitespace behavior.
-- [#210 — Add audit evidence for disabled policy rules](https://github.com/NAEOS-foundation/naeos/issues/210) — make disabled policy rules observable instead of silently bypassed.
-- [#211 — Document the NAEOS contribution workflow](https://github.com/NAEOS-foundation/naeos/issues/211) — improve the path from repository orientation to a first Issue/PR.
-- [#212 — Strengthen experiment evidence format](https://github.com/NAEOS-foundation/naeos/issues/212) — establish a consistent, independently inspectable evidence structure.
-- [#213 — Review plugin registry contributor path](https://github.com/NAEOS-foundation/naeos/issues/213) — verify the smallest end-to-end plugin contribution path.
+1. Run the canonical Golden Path from this page.
+2. Inspect the evidence and record the exact command, commit, and observed result.
+3. Choose one small improvement, challenge, or documentation gap.
+4. Report the finding through an issue or discussion before taking on a larger change.
+5. Follow [CONTRIBUTING.md](CONTRIBUTING.md) for the implementation and PR requirements.
 
-These are intentionally scoped so a new contributor can inspect the relevant code or documentation before writing a large change. If none fits, use the issue templates to propose a concrete problem or documentation gap.
-
-The simplest accurate contribution flow is:
+The simplest contribution flow is:
 
 1. Clone the repository and read [CONTRIBUTING.md](CONTRIBUTING.md).
 2. Pick a concrete issue, question, or documentation gap.
@@ -251,7 +246,7 @@ The simplest accurate contribution flow is:
 4. Run the relevant tests or validation commands.
 5. Open a pull request and explain what changed and why.
 
-This repository already defines the engineering workflow in [CONTRIBUTING.md](CONTRIBUTING.md). The intent here is to make the first step feel approachable.
+Good first work includes clarifying onboarding, reproducing a limitation, improving an example, strengthening a test, or challenging a governance assumption. See [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE) and [docs/community/contributor-ladder.md](docs/community/contributor-ladder.md).
 
 ## 12. Documentation map
 
@@ -284,3 +279,16 @@ This is more useful than a vague “this seems broken” note.
 NAEOS should not merely make AI agents more capable. It should make their actions more understandable, governable, verifiable, and trustworthy.
 
 That is the project’s real starting point: not a faster code generator, but a more disciplined engineering layer for AI-assisted work.
+
+## AI-agent instruction trust boundary
+
+Generated agent instructions such as `AGENTS.md` and `.opencode` are **advisory context, not an authorization boundary**. An AI agent with write access can alter or remove those files, so their contents must not be treated as tamper-evident policy evidence.
+
+Consequential authorization is enforced by NAEOS governance and runtime controls, not by instruction-file presence or wording. In particular:
+
+- policy evaluation determines whether a requested action is permitted;
+- the control plane fails closed when no policy matches;
+- runtime authorization remains separate from agent-provided instructions;
+- evidence and independent verification should rely on recorded execution/evidence artifacts rather than an agent's claim that its instruction file was followed.
+
+If tamper-evidence for instruction content is required in a future workflow, it must be introduced as a separately specified integrity mechanism; this onboarding guide does not imply that such a mechanism currently exists.

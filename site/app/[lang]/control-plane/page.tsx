@@ -1,10 +1,11 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LANGUAGES, DEFAULT_LANG, SITE, type Lang } from "@/lib/site";
 import ControlPlaneLiveDemo from "@/components/control-plane/ControlPlaneLiveDemo";
+import PolicyChangeProof from "@/components/control-plane/PolicyChangeProof";
 
 export function generateStaticParams() {
   return LANGUAGES.map((lang) => ({ lang }));
@@ -123,6 +124,35 @@ export default async function ControlPlanePage(props: { params: Promise<{ lang: 
           </p>
         </div>
         <ControlPlaneLiveDemo lang={lang} />
+      </section>
+
+      <section className="control-plane-demo" aria-labelledby="verified-path-title">
+        <div className="section-heading">
+          <div className="eyebrow">VERIFIED GOLDEN PATH</div>
+          <h2 id="verified-path-title">{id ? "Jalankan. Inspeksi. Verifikasi." : "Run. Inspect. Verify."}</h2>
+          <p>
+            {id
+              ? "Ikuti satu jalur onboarding dari control boundary ke evidence dan independent verification."
+              : "Follow one onboarding path from the control boundary to evidence and independent verification."}
+          </p>
+        </div>
+        <div className="control-plane-actions">
+          <a href={`${SITE.repo}/blob/main/docs/VERIFIED-GOLDEN-PATH.md`} className="btn btn-primary btn-lg" target="_blank" rel="noopener">
+            {id ? "Jalankan Golden Path" : "Run Verified Golden Path"}
+          </a>
+          <a href={`${SITE.repo}/blob/main/docs/control-plane/p1-11-independent-verifier-cli.md`} className="btn btn-secondary btn-lg" target="_blank" rel="noopener">
+            {id ? "Lihat Verifier" : "Inspect Verifier"}
+          </a>
+        </div>
+      </section>
+
+      <section className="control-plane-demo" aria-labelledby="policy-change-proof-title">
+        <div className="section-heading">
+          <div className="eyebrow">FLAGSHIP PROOF</div>
+          <h2 id="policy-change-proof-title">{id ? "Apa yang terjadi ketika policy berubah?" : "What happens when policy changes?"}</h2>
+          <p>{id ? "Satu skenario end-to-end untuk memperlihatkan mengapa authorization harus terikat pada policy dan evidence." : "One end-to-end scenario showing why authorization must remain bound to policy and evidence."}</p>
+        </div>
+        <PolicyChangeProof lang={lang} />
       </section>
 
       <section className="control-plane-principles">

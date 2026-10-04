@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 package main
@@ -47,7 +47,7 @@ Example:
 				if !ok {
 					continue
 				}
-				artifacts := adapter.GenerateProject(name)
+				artifacts := adapter.GenerateProject(name, adapters.ModuleRef{Name: "core", Path: "./internal/core"})
 				artifacts = append(artifacts, adapter.GenerateDockerfile(name)...)
 				artifacts = append(artifacts, adapter.GenerateCI(name)...)
 

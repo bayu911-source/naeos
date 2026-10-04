@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // Command level3-evidence exercises the real NAEOS execution gateway against
@@ -459,7 +459,7 @@ func newGateway(decision policy.Decision, sandbox gateway.Sandbox) (*gateway.Exe
 		Scope:   policy.Scope{Resource: resource, Action: action, Environment: environment},
 		Default: decision, Active: true,
 	})
-	cp := control.New(reg, control.FailClosed(true))
+	cp := control.New(reg)
 	return gateway.New(cp, sandbox), cp
 }
 

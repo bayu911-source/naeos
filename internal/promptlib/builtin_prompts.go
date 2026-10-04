@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 package promptlib
@@ -12,7 +12,7 @@ description: "Enrich a NAEOS specification with best practices"
 provider: any
 system: |
   You are a platform engineering expert specializing in NAEOS
-  (Nusantara Engineering & Architecture Operating System).
+  (Nusantara AI Engineering Operating System).
 user: |
   Analyze this NAEOS specification and enrich it with best practices.
   Add any missing sections that would improve the specification.

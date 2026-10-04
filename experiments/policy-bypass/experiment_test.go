@@ -1,4 +1,4 @@
-// Copyright 2024-2026 NAEOS Foundation
+// Copyright 2025 NAEOS contributors
 // SPDX-License-Identifier: Apache-2.0
 
 package main
@@ -25,7 +25,6 @@ func TestPolicyBypassLandscape(t *testing.T) {
 		"exists: passes on nil value":                 true,
 		"whitespace satisfies not_empty":              true,
 		"TODO obfuscation evades no-todo":             true,
-		"fail-open allows unmatched request":          true,
 		"AGENTS.md guidance is advisory, not binding": true,
 	}
 
@@ -36,8 +35,8 @@ func TestPolicyBypassLandscape(t *testing.T) {
 		}
 	}
 
-	if len(results) != 18 {
-		t.Errorf("expected 18 scenarios, got %d", len(results))
+	if len(results) != 17 {
+		t.Errorf("expected 17 scenarios, got %d", len(results))
 	}
 	for _, l := range []Layer{LayerEvaluator, LayerControl, LayerReviewer, LayerPrompt, LayerPipeline} {
 		found := false
